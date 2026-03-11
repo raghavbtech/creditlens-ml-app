@@ -12,7 +12,7 @@ import pandas as pd
 # ============================================================================
 st.set_page_config(
     page_title="CreditLens | Loan Approval",
-    page_icon="💳",
+    page_icon="",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -37,11 +37,10 @@ CUSTOM_CSS = """
     
     /* Custom header */
     .main-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #000000 0%, #000000 100%);
         padding: 2rem 3rem;
         border-radius: 20px;
         margin-bottom: 2rem;
-        box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
     }
     
     .main-header h1 {
@@ -66,11 +65,11 @@ CUSTOM_CSS = """
         font-family: 'Sora', sans-serif;
         font-weight: 600;
         font-size: 1.4rem;
-        color: #667eea;
+        color: #ffffff;
         margin-top: 2rem;
         margin-bottom: 1rem;
         padding-bottom: 0.5rem;
-        border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.3);
     }
     
     /* Input labels */
@@ -95,7 +94,7 @@ CUSTOM_CSS = """
     }
     
     .stSelectbox > div > div:hover {
-        border-color: #667eea;
+        border-color: #000000;
     }
     
     /* Selectbox dropdown menu */
@@ -136,14 +135,13 @@ CUSTOM_CSS = """
     }
     
     .stNumberInput > div > div > input:focus {
-        border-color: #667eea;
-        box-shadow: 0 0 0 1px #667eea;
+        border-color: #000000;
     }
     
     /* Prediction button */
     .stButton > button {
         width: 100%;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #000000 0%, #000000 100%);
         color: white;
         font-family: 'Sora', sans-serif;
         font-weight: 600;
@@ -153,12 +151,10 @@ CUSTOM_CSS = """
         border-radius: 12px;
         margin-top: 2rem;
         transition: all 0.3s ease;
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
     }
     
     .stButton > button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
     }
     
     /* Result cards */
@@ -169,7 +165,6 @@ CUSTOM_CSS = """
         border-radius: 16px;
         padding: 2rem;
         margin-top: 2rem;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
     
     .result-approved {
@@ -199,7 +194,7 @@ CUSTOM_CSS = """
     /* Info box */
     .info-box {
         background: rgba(102, 126, 234, 0.1);
-        border-left: 4px solid #667eea;
+        border-left: 4px solid #000000;
         padding: 1rem 1.5rem;
         border-radius: 8px;
         margin: 1.5rem 0;
@@ -224,7 +219,7 @@ CUSTOM_CSS = """
     }
     
     .credit-excellent { background: linear-gradient(90deg, #10b981, #059669); }
-    .credit-good { background: linear-gradient(90deg, #3b82f6, #2563eb); }
+    .credit-good { background: linear-gradient(90deg, #000000, #000000); }
     .credit-fair { background: linear-gradient(90deg, #f59e0b, #d97706); }
     .credit-poor { background: linear-gradient(90deg, #ef4444, #dc2626); }
     
@@ -272,7 +267,7 @@ def get_credit_status(credit_score: float) -> tuple[str, str]:
     if credit_score >= 750:
         return "Excellent", "#10b981"
     elif credit_score >= 700:
-        return "Good", "#3b82f6"
+        return "Good", "#000000"
     elif credit_score >= 650:
         return "Fair", "#f59e0b"
     else:
@@ -287,7 +282,7 @@ def get_dti_status(dti_ratio: float) -> tuple[str, str]:
     if dti_ratio <= 30:
         return "Excellent", "#10b981"
     elif dti_ratio <= 40:
-        return "Good", "#3b82f6"
+        return "Good", "#000000"
     elif dti_ratio <= 50:
         return "Fair", "#f59e0b"
     else:
@@ -422,7 +417,7 @@ def prepare_features(
 
 st.markdown("""
 <div class="main-header">
-    <h1>🔍 CreditLens</h1>
+    <h1>CreditLens</h1>
     <p>ML-Powered Loan Approval & Risk Prediction</p>
 </div>
 """, unsafe_allow_html=True)
@@ -432,15 +427,15 @@ st.markdown("""
 # ============================================================================
 
 with st.sidebar:
-    st.markdown("### 🤖 Model Selection")
+    st.markdown("### Model Selection")
     
     model_choice = st.selectbox(
         "Choose Prediction Model",
-        ["Logistic Regression ⭐", "Naive Bayes", "KNN"],
+        ["Logistic Regression", "Naive Bayes", "KNN"],
         help="Logistic Regression recommended for best accuracy"
     )
     
-    st.markdown("### 📊 About the Models")
+    st.markdown("### About the Models")
     st.markdown("""
     <div class="info-box">
     <strong>Logistic Regression</strong> — Best overall accuracy and probability estimates
@@ -451,7 +446,7 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("### 💡 Quick Tips")
+    st.markdown("### Quick Tips")
     st.markdown("""
     <div class="info-box">
     <strong>Improve Your Chances:</strong><br>
@@ -465,7 +460,7 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("""
     <div class="footer-text">
-    Built with ML & ❤️<br>
+    Built with ML<br>
     Version 2.1 (Refactored)
     </div>
     """, unsafe_allow_html=True)
@@ -477,7 +472,7 @@ with st.sidebar:
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown('<p class="section-header">👤 Personal Information</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-header">Personal Information</p>', unsafe_allow_html=True)
     
     age = st.number_input("Age", min_value=18, max_value=100, value=30)
     gender = st.selectbox("Gender", ["Male", "Female"])
@@ -485,7 +480,7 @@ with col1:
     dependents = st.number_input("Number of Dependents", min_value=0, max_value=10, value=0)
     education = st.selectbox("Education Level", ["Graduate", "Not Graduate"])
     
-    st.markdown('<p class="section-header">💼 Employment Details</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-header">Employment Details</p>', unsafe_allow_html=True)
     
     employment_status = st.selectbox(
         "Employment Status",
@@ -497,7 +492,7 @@ with col1:
     )
 
 with col2:
-    st.markdown('<p class="section-header">💰 Financial Information</p>', unsafe_allow_html=True)
+    st.markdown('<p class="section-header">Financial Information</p>', unsafe_allow_html=True)
     
     applicant_income = st.number_input("Applicant Income (₹)", min_value=0.0, value=50000.0, step=1000.0)
     coapplicant_income = st.number_input("Coapplicant Income (₹)", min_value=0.0, value=0.0, step=1000.0)
@@ -543,7 +538,7 @@ with col2:
 # LOAN DETAILS
 # ============================================================================
 
-st.markdown('<p class="section-header">🏠 Loan Details</p>', unsafe_allow_html=True)
+st.markdown('<p class="section-header">Loan Details</p>', unsafe_allow_html=True)
 
 col3, col4, col5 = st.columns(3)
 
@@ -574,7 +569,7 @@ with col7:
 # PREDICTION LOGIC
 # ============================================================================
 
-if st.button("🔮 Get Loan Approval Prediction", use_container_width=True):
+if st.button("Get Loan Approval Prediction", use_container_width=True):
     
     if log_model is None or nb_model is None or knn_model is None:
         st.error("Models failed to load. Please ensure all .pkl files are available.")
@@ -606,7 +601,7 @@ if st.button("🔮 Get Loan Approval Prediction", use_container_width=True):
             features_scaled = scaler.transform(features)
             
             # Get prediction from selected model
-            if model_choice == "Logistic Regression ⭐":
+            if model_choice == "Logistic Regression":
                 prediction = log_model.predict(features_scaled)[0]
                 probability = log_model.predict_proba(features_scaled)[0]
             elif model_choice == "Naive Bayes":
@@ -626,7 +621,7 @@ if st.button("🔮 Get Loan Approval Prediction", use_container_width=True):
             if prediction == 1:
                 st.markdown("""
                 <div class="result-card result-approved">
-                    <div class="result-title" style="color: #10b981;">✅ Application Approved</div>
+                    <div class="result-title" style="color: #10b981;">Application Approved</div>
                     <p style="color: #e0e6ff; margin: 0.5rem 0;">Congratulations! Your loan application has been approved.</p>
                     <div class="result-prob">Confidence: {:.2f}%</div>
                 </div>
@@ -634,10 +629,10 @@ if st.button("🔮 Get Loan Approval Prediction", use_container_width=True):
             else:
                 st.markdown("""
                 <div class="result-card result-rejected">
-                    <div class="result-title" style="color: #ef4444;">❌ Application Declined</div>
+                    <div class="result-title" style="color: #ef4444;">Application Declined</div>
                     <p style="color: #e0e6ff; margin: 0.5rem 0;">Unfortunately, your application was not approved at this time.</p>
                     <div class="result-prob">Approval Probability: {:.2f}%</div>
-                    <p style="color: #a0aec0; margin-top: 1rem; font-size: 0.9rem;">💡 Try improving your credit score or reducing your DTI ratio for better chances.</p>
+                    <p style="color: #a0aec0; margin-top: 1rem; font-size: 0.9rem;">Try improving your credit score or reducing your DTI ratio for better chances.</p>
                 </div>
                 """.format(approval_prob), unsafe_allow_html=True)
             

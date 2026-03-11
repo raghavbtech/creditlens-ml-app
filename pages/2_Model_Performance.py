@@ -2,7 +2,7 @@ import streamlit as st
 import json
 import pandas as pd
 
-st.title("📊 Model Performance Comparison")
+st.title("Model Performance Comparison")
 
 # load metrics
 with open("metrics.json") as f:
@@ -17,7 +17,7 @@ st.dataframe(df.style.format("{:.3f}"))
 # highlight best model
 best_model = df["f1"].idxmax()
 
-st.success(f"🏆 Best Model: {best_model} (Highest F1 Score)")
+st.success(f"Best Model: {best_model} (Highest F1 Score)")
 
 st.markdown("""
 **Metrics Explained**
